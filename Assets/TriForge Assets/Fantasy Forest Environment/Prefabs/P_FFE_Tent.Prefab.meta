@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 21824184ac42a4c408b31da73cd6a82c
+labels:
+- Prefab
+- model
+- mesh
+- Doodad
+timeCreated: 1427884357
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Prefabs/P_FFE_Tent.Prefab
+  uploadId: 713996

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a23ed5d72abe1db4d89d7741f11b6e5c
+timeCreated: 1562851960
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Prefabs/Trees/P_FFE_Spruce_B1.Prefab
+  uploadId: 713996

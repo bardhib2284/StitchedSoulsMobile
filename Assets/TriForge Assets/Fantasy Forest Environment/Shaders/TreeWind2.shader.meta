@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 97ede4124bb954c46a65a876df4cfad2
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - FFE_Wind_Mask: {fileID: 2800000, guid: 8132ffd5113818049a1b7ec588afbab3, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Shaders/TreeWind2.shader
+  uploadId: 713996

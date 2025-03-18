@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d430b66a36d8fea48b233b78cc6cad86
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Scenes/Built-in Renderer/Scenes
+    Data/DemoScene_Autumn/DemoScene_AutumnSettings.lighting
+  uploadId: 713996

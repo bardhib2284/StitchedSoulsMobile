@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5cb039d3a64491f4ebfc852d25b5ee70
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/ExampleScenes/ExampleScripts/ShotBehavior.cs
+  uploadId: 482281

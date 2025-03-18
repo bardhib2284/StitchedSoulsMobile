@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c9efc33befc68374c889396a73a00a5d
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/Scripts/VolumetricLineStripBehavior.cs
+  uploadId: 482281

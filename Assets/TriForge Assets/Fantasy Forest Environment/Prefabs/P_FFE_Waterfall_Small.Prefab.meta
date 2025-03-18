@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: b8f183bdc6b1ab54eaf217dc9467bba5
+labels:
+- Prefab
+timeCreated: 1428504877
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Prefabs/P_FFE_Waterfall_Small.Prefab
+  uploadId: 713996

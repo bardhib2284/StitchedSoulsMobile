@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 20ba0f58892576744bc20f67911d3058
+labels:
+- Prefab
+- Rock
+- model
+- mesh
+- Doodad
+timeCreated: 1427793034
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Prefabs/P_FFE_Rock4.Prefab
+  uploadId: 713996

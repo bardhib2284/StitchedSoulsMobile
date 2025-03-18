@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 1a0edf7300c5c2a4fa0a417aa3b4c9cf
+labels:
+- Prefab
+- model
+- Wood
+- mesh
+- Doodad
+- Fence
+timeCreated: 1428399565
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Prefabs/P_FFE_Fence01_Mid.Prefab
+  uploadId: 713996

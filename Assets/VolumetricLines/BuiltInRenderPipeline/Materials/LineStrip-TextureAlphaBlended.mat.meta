@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 73ac99f5639fbab4c8b6fff041c809eb
+timeCreated: 1578845104
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: -1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/Materials/LineStrip-TextureAlphaBlended.mat
+  uploadId: 482281

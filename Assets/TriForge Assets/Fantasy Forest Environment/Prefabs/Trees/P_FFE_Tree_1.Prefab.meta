@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 46cd7505b523d234fa00d2c791433c86
+timeCreated: 1561563360
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Prefabs/Trees/P_FFE_Tree_1.Prefab
+  uploadId: 713996

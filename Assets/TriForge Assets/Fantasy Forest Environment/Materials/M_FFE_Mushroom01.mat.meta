@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1557a09cea7de124187865d1cce9a75c
+labels:
+- Material
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/M_FFE_Mushroom01.mat
+  uploadId: 713996

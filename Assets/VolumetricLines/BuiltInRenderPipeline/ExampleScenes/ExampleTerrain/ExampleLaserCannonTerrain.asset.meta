@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: b8c692866a7f00f45b6dd836acf1bd4f
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/ExampleScenes/ExampleTerrain/ExampleLaserCannonTerrain.asset
+  uploadId: 482281

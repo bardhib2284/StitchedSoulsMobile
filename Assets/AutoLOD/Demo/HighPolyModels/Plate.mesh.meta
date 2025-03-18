@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c83e9c6aaa7a47e4996e33dfcd493032
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185662
+  packageName: AutoLOD - Mesh Decimator
+  packageVersion: 5.4.1
+  assetPath: Assets/AutoLOD/Demo/HighPolyModels/Plate.mesh
+  uploadId: 731440

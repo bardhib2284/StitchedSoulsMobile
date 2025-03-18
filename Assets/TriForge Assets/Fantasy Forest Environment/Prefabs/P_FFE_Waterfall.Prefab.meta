@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 0e41cef48ca9b6f4686e59aec19b3f15
+labels:
+- Prefab
+timeCreated: 1428504872
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Prefabs/P_FFE_Waterfall.Prefab
+  uploadId: 713996

@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: ad00a3bf6d3c5e94cbc53a7d0d337aca
+DefaultImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/ExampleScenes/LaserCannon.unity
+  uploadId: 482281

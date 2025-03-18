@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: e989a0018bd9b004b88b525769337586
+labels:
+- Prefab
+- Mushroom
+- Doodad
+- mesh
+- clutter
+- Foliage
+- model
+timeCreated: 1426590532
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Prefabs/P_FFE_Mushroom03_Group.Prefab
+  uploadId: 713996

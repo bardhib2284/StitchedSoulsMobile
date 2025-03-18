@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 951acba86dc8b764b9387127c7a03f97
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/ExampleScenes/ExampleMaterials/smoke_mat.mat
+  uploadId: 482281

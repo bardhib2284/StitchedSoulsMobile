@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 174173bcbfb7bff41ab736987776b31e
+timeCreated: 1499364216
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/Shaders/LineStrip-TextureAlphaBlended.shader
+  uploadId: 482281

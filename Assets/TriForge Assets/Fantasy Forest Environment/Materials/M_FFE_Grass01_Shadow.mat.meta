@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 1554a25659d7ce3489c005f151faf15d
+labels:
+- Material
+- grass
+- Terrain
+timeCreated: 1428405805
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/M_FFE_Grass01_Shadow.mat
+  uploadId: 713996

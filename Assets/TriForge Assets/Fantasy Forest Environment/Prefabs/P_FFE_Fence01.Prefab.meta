@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 5fe7548c07360e74396ccea9ff342804
+timeCreated: 1562586352
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Prefabs/P_FFE_Fence01.Prefab
+  uploadId: 713996

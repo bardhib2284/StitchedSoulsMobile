@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d430b13b5325c7f42a15b1c05d0dc113
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 206800
+  packageName: Environment / Weather / Nature VFX pack
+  packageVersion: 1.1.2
+  assetPath: Assets/Lana Studio/Environment VFX pack/Demo/Animations/Camera_Animation.controller
+  uploadId: 722333

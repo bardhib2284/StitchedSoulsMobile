@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2b5e4204d4eefbe4983de8ede70e6d74
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185662
+  packageName: AutoLOD - Mesh Decimator
+  packageVersion: 5.4.1
+  assetPath: Assets/AutoLOD/Demo/Models/Room.mesh
+  uploadId: 731440

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5be6b0a5313d28745a5f29ef7fc5602d
+timeCreated: 1444681027
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Scenes/Built-in Renderer/Scenes
+    Data/Terrain_1.asset
+  uploadId: 713996

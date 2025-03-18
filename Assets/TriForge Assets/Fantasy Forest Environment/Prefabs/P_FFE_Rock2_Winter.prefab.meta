@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: d6acbc38ef7ae494280482bdebcd1f56
+labels:
+- Prefab
+- Rock
+- model
+- mesh
+- Doodad
+timeCreated: 1426590524
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Prefabs/P_FFE_Rock2_Winter.prefab
+  uploadId: 713996

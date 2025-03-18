@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 752abb5f7f9da4f4a8263d5c8e1d1114
+timeCreated: 1609361758
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185662
+  packageName: AutoLOD - Mesh Decimator
+  packageVersion: 5.4.1
+  assetPath: Assets/AutoLOD/Demo/Demo.unity
+  uploadId: 731440

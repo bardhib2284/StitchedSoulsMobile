@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2c240648e3c98ce42b3de7fc31bcb4a0
+labels:
+- Material
+- Rock
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/M_FFE_Rock_A.mat
+  uploadId: 713996

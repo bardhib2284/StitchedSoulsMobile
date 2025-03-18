@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 98fe0711a57757841834f5d3575e660a
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/ExampleScenes/ExamplePrefabs/Cannon.prefab
+  uploadId: 482281

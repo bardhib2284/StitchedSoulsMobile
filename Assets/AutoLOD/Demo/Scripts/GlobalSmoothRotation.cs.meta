@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6adc92ad0359e8d4c94288456af5934b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185662
+  packageName: AutoLOD - Mesh Decimator
+  packageVersion: 5.4.1
+  assetPath: Assets/AutoLOD/Demo/Scripts/GlobalSmoothRotation.cs
+  uploadId: 731440

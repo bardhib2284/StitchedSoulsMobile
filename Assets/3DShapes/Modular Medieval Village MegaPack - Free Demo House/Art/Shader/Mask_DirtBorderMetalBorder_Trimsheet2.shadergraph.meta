@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: bbf677af661a5e9459a4b99467561977
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 305058
+  packageName: Modular Medieval Village MegaPack - Free Demo House
+  packageVersion: 1.0
+  assetPath: Assets/3DShapes/Modular Medieval Village MegaPack - Free Demo House/Art/Shader/Mask_DirtBorderMetalBorder_Trimsheet2.shadergraph
+  uploadId: 722618

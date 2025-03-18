@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9a0c3383523899643a8d0661cfaca4e4
+timeCreated: 1499363445
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/ExampleScenes/ExamplePrefabs/shot_prefab.prefab
+  uploadId: 482281

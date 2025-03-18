@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7e56b6e37c078ed47b6d0e9d9249ea9f
+labels:
+- Material
+- Wood
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/M_FFE_Bark01_Bottom.mat
+  uploadId: 713996

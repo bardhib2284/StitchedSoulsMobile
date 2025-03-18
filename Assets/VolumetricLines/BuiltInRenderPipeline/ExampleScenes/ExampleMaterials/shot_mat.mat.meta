@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f68f8c3a3d76fb74cbb880d372c81620
+timeCreated: 1499339018
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/ExampleScenes/ExampleMaterials/shot_mat.mat
+  uploadId: 482281

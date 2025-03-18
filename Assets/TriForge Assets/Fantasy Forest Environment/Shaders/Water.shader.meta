@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7195cf34bbfee1645acd4aadfb73ebc3
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Shaders/Water.shader
+  uploadId: 713996

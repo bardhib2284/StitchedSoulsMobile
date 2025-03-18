@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ae1cf0157788eb749bb5cfffa25b7aa3
+timeCreated: 1578845105
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: -1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/Materials/LineStrip-TextureAdditive.mat
+  uploadId: 482281

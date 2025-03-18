@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 206d4fc2e7c1b054dab4295a740143b0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 206800
+  packageName: Environment / Weather / Nature VFX pack
+  packageVersion: 1.1.2
+  assetPath: Assets/Lana Studio/Environment VFX pack/Demo/Scripts/ObjectsSwitcher.cs
+  uploadId: 722333

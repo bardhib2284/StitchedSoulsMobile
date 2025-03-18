@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7fee46bf5ed068f4e91a36c7c0d48d09
+timeCreated: 1444400878
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/Particle
+    Effects/M_FFE_Particle_Leaf.mat
+  uploadId: 713996

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 2bb56bc7421bc1c4d9dfd19984bff7c1
+labels:
+- Material
+timeCreated: 1428405996
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/M_FFE_Road.mat
+  uploadId: 713996

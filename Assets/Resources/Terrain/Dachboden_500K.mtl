@@ -1,0 +1,20 @@
+# 
+# Wavefront material file
+# Created in RealityCapture v1.0.2
+# www.capturingreality.com
+# 
+
+newmtl Dachboden_500K_Material
+Ka 1 1 1
+Kd 1 1 1
+d 1
+Ns 0
+illum 1
+
+newmtl Dachboden_500K_Material_u1_v1
+Ka 1 1 1
+Kd 1 1 1
+d 1
+Ns 0
+illum 1
+map_Kd Dachboden_500K_u1_v1.jpg

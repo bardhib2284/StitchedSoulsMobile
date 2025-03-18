@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 11530f2b0a0cd2442949827ecbb622f2
+timeCreated: 1499364830
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/Prefabs/SingleLine-LightSaber.prefab
+  uploadId: 482281

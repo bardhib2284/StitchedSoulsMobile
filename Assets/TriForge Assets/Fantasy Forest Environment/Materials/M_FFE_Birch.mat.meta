@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 21bd3758753470a4d9abcb8cf22060df
+timeCreated: 1556011456
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/M_FFE_Birch.mat
+  uploadId: 713996

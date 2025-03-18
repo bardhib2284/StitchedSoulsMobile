@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 7a83e7e128771874e87abba46db25a73
+labels:
+- Material
+- grass
+- Terrain
+timeCreated: 1428406168
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/M_FFE_Forestfloor.mat
+  uploadId: 713996

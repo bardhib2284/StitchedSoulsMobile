@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a19f00216e495c04b92ce2638c84bb3e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185662
+  packageName: AutoLOD - Mesh Decimator
+  packageVersion: 5.4.1
+  assetPath: Assets/AutoLOD/Demo/Materials/Plinths.mat
+  uploadId: 731440

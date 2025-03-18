@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0884dceb0d4308c4eb8bc763c8f8deae
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/Scripts/VolumetricLineBehavior.cs
+  uploadId: 482281

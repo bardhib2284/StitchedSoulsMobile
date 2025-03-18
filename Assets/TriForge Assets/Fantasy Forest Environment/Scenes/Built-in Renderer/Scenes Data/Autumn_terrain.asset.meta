@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fa93f4caadb15144aad265ee42e0269d
+timeCreated: 1472462030
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Scenes/Built-in Renderer/Scenes
+    Data/Autumn_terrain.asset
+  uploadId: 713996

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 62632f272f383f04984817342239ea70
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 206800
+  packageName: Environment / Weather / Nature VFX pack
+  packageVersion: 1.1.2
+  assetPath: Assets/Lana Studio/Environment VFX pack/Demo/Scripts/_InputKeyBoard.cs
+  uploadId: 722333

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 47e5a9ae602f91d4f9372bfe1b7ed666
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185662
+  packageName: AutoLOD - Mesh Decimator
+  packageVersion: 5.4.1
+  assetPath: Assets/AutoLOD/Demo/Prefabs/Doughnut.prefab
+  uploadId: 731440

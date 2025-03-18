@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e6db2905c75863849a52bec8568a921c
+labels:
+- Material
+- Wood
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/Winter/M_FFE_Tree_Bark_Winter.mat
+  uploadId: 713996

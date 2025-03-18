@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 90f6f57e440c631488f2cc1d69f42408
+timeCreated: 1427207254
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/Particle
+    Effects/M_FFE_Particle_Flame.mat
+  uploadId: 713996

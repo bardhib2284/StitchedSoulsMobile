@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 833b0f993eaac464d9852c58c6100db8
+timeCreated: 1427888888
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/Particle
+    Effects/M_FFE_Particle_Splash.mat
+  uploadId: 713996

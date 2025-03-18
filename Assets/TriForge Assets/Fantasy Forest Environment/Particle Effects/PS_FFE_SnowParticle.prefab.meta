@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ec90adb35fb15694d8d72cec858330da
+timeCreated: 1472473517
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Particle Effects/PS_FFE_SnowParticle.prefab
+  uploadId: 713996

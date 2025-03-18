@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5b2755a8fdfb8dc43a73d7fa7608323a
+timeCreated: 1578843795
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29160
+  packageName: Volumetric Lines
+  packageVersion: 3.1.1
+  assetPath: Assets/VolumetricLines/BuiltInRenderPipeline/ExampleScenes/LineGenerationScripts.unity
+  uploadId: 482281

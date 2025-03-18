@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 9aaac21cdb897524aa7a0b98f5a96706
+labels:
+- Material
+timeCreated: 1427809294
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34245
+  packageName: Fantasy Forest Environment
+  packageVersion: 2.3.3
+  assetPath: Assets/TriForge Assets/Fantasy Forest Environment/Materials/M_FFE_Tent.mat
+  uploadId: 713996
