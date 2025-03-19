@@ -48,20 +48,28 @@ public class HealthUI : MonoBehaviour
 
     private IEnumerator SmoothBackgroundUpdate()
     {
-        AnimationOn = true;
-        // 📉 Zbut ngadalë backgroundSlider derisa të arrijë vlerën e HealthSlider
-        while (backgroundSlider.value > HealthSlider.value)
+        if(this.gameObject.activeInHierarchy)
         {
-            backgroundSlider.value = Mathf.Lerp(backgroundSlider.value, HealthSlider.value, Time.deltaTime * smoothSpeed);
-            yield return new WaitForEndOfFrame(); // Sigurohet që të vazhdojë çdo frame
-            if(backgroundSlider.value <= 3)
+            if (backgroundSlider != null && HealthSlider != null)
             {
-                backgroundSlider.enabled = false;
+                AnimationOn = true;
+                // 📉 Zbut ngadalë backgroundSlider derisa të arrijë vlerën e HealthSlider
+                while (backgroundSlider.value > HealthSlider.value)
+                {
+                    backgroundSlider.value = Mathf.Lerp(backgroundSlider.value, HealthSlider.value, Time.deltaTime * smoothSpeed);
+                    yield return new WaitForEndOfFrame(); // Sigurohet që të vazhdojë çdo frame
+                    if (backgroundSlider.value <= 3)
+                    {
+                        backgroundSlider.enabled = false;
+                    }
+                    fillImageSlider.enabled = HealthSlider.value > 0;
+                    fillImageBackground.enabled = backgroundSlider.value > 2;
+                }
+                AnimationOn = false;
             }
-            fillImageSlider.enabled = HealthSlider.value > 0;
-            fillImageBackground.enabled = backgroundSlider.value > 2;
         }
-        AnimationOn = false;
+        
+
     }
 
     private IEnumerator SmoothBackgroundUpdateMin()

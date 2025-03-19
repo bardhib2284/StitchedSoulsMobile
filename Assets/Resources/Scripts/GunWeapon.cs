@@ -12,12 +12,6 @@ public class GunWeapon : Weapon
     private float nextFireTime = 0f;
     public List<EnemyAI> visibleEnemies = new List<EnemyAI>();
 
-    private PlayerController playerController;
-
-    private void Start()
-    {
-        playerController = GetComponentInParent<PlayerController>();
-    }
     public override void Attack()
     {
         if (animator == null)

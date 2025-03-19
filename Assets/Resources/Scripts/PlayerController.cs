@@ -2,6 +2,7 @@
 using Assets.Resources.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -89,48 +90,67 @@ public class PlayerController : MonoBehaviour
         atc.AttackButton.onClick.AddListener(AttackCoroutine);
 
     }
-
-    public void Idle()
+    IEnumerator IdleEnumerator()
     {
-        if(this.enabled)
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        if (this.enabled && !Attacking)
         {
             var animatorinfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
             var current_animation = animatorinfo[0].clip.name;
-            if (current_animation.Contains("Idle"))
-                return;
-            var walkAnimation = Random.Range(0, 101);
-            if (walkAnimation >= 50)
+            if (!current_animation.Contains("Idle"))
             {
-                AnimatorController.SetTrigger("Idle");
+                var IdleAnimation = Random.Range(0, 101);
+                if (IdleAnimation >= 50)
+                {
+                    AnimatorController.SetTrigger("Idle");
+                }
+                else
+                    AnimatorController.SetTrigger("HappyIdle");
             }
-            else
-                AnimatorController.SetTrigger("HappyIdle");
         }
     }
 
+    public void Idle()
+    {
+        StartCoroutine(IdleEnumerator());
+    }
+
+    IEnumerator MoveEnumerator()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        if (this.enabled && !Attacking)
+        {
+            var animatorinfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
+            var current_animation = animatorinfo[0].clip.name;
+            if (current_animation.Contains("Walk"))
+                yield break;
+            var walkAnimation = Random.Range(0, 101);
+            if (walkAnimation >= 50)
+            {
+                AnimatorController.SetTrigger("SneakyWalk");
+            }
+            else
+                AnimatorController.SetTrigger("Walk");
+        }
+    }
     public void Move()
     {
-        var animatorinfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
-        var current_animation = animatorinfo[0].clip.name;
-        if (current_animation.Contains("Walk"))
-            return;
-        var walkAnimation = Random.Range(0, 101);
-        if (walkAnimation >= 50)
-        {
-            AnimatorController.SetTrigger("SneakyWalk");
-        }
-        else
-            AnimatorController.SetTrigger("Walk");
+        StartCoroutine(MoveEnumerator());
     }
     void Jump()
     {
-        if (PlayerStamina.UseStamina(3f))
+        if (this.enabled && !Attacking)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z); // Reset Y velocity before jumping
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (PlayerStamina.UseStamina(3f))
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z); // Reset Y velocity before jumping
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+            else
+                WantsToJump = false;
         }
-        else
-            WantsToJump = false;
     }
     public void WantToRoll()
     {
@@ -142,6 +162,10 @@ public class PlayerController : MonoBehaviour
         if(isGrounded)
             WantsToJump = true;
     }
+
+    private float nextCheckTime = 0f;
+    public float checkInterval = 1f; // Koha ndërmjet check-eve (1 sekondë)
+
     private void FixedUpdate()
     {
         if (isRolling)
@@ -199,7 +223,11 @@ public class PlayerController : MonoBehaviour
 
         if (joystickMagnitude < IdleSpeedHanlder && !Attacking)
         {
-            // Idle();
+            if (Time.time >= nextCheckTime)
+            {
+                nextCheckTime = Time.time + checkInterval; // Riset për kontrollin tjetër
+                Idle();
+            }
         }
         else if (joystickMagnitude <= MoveSpeedHandler && !Attacking)
         {
@@ -262,29 +290,41 @@ public class PlayerController : MonoBehaviour
 
     public void AttackCoroutine()
     {
-        if(CurrentEquipedWeapon != null)
-        {
-            if (PlayerStamina.UseStamina(3f))
-            {
-                if (CurrentEquipedWeapon != null)
-                    StartCoroutine(Attack());
-            }
-        }
+        StartCoroutine(Attack());
+
+        
     }
 
     IEnumerator Attack()
     {
-        canAttack = false;
-        Attacking = true;
-        Debug.Log("Attack performed!");
-        CurrentEquipedWeapon = GetComponentInChildren<Weapon>();
-        CurrentEquipedWeapon.Attack();
-        yield return new WaitForSeconds(attackCooldown/2);
-        Attacking = false;
-        yield return new WaitForSeconds(attackCooldown);
-        canAttack = true;
+        yield return new WaitForEndOfFrame();
+        var animatorinfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
+        var current_animation = animatorinfo[0].clip.name;
+        if (current_animation.Contains("Attack")) yield break;
+        yield return new WaitForEndOfFrame();
+
+        if (CurrentEquipedWeapon != null && canAttack && !Attacking)
+        {
+
+            if (CurrentEquipedWeapon != null)
+            {
+                canAttack = false;
+                Attacking = true;
+                Debug.Log("Attack performed!");
+                CurrentEquipedWeapon = GetComponentInChildren<Weapon>();
+                CurrentEquipedWeapon.Attack();
+                yield return new WaitForSecondsRealtime(attackCooldown);
+                Attacking = false;
+                canAttack = true;
+            }
+            
+        }
     }
 
+    public void FinishAttack()
+    {
+
+    }
     public void ModifyAttackSpeed(float multiplier)
     {
         currentAttackSpeed = baseAttackSpeed * multiplier;

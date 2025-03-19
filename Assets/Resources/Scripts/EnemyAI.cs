@@ -23,6 +23,7 @@ namespace Assets.Resources.Scripts
         public float Health;
 
         public bool IsStunned = false;
+        public bool Attacking = false;
 
         public float DistanceToPlayer = 0;
 
@@ -30,6 +31,7 @@ namespace Assets.Resources.Scripts
         public HealthUI HealthUI;
         public float MaxHealth = 100;
         public float CurrentHealth;
+        public float FieldOfView = 70f;
         public EnemyAI() { }
 
         public void Start()
@@ -39,6 +41,7 @@ namespace Assets.Resources.Scripts
             Target = GameObject.FindGameObjectWithTag("Player").transform;
             PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             Animator = GetComponent<Animator>();
+            if(HealthUI != null)
             HealthUI.SetHealth(CurrentHealth);
         }
         public void TakeDamage(float damage) {
@@ -47,13 +50,17 @@ namespace Assets.Resources.Scripts
             if (CurrentHealth <= 0)
             {
                 isDead = true;
+                this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
                 var scripts = GetComponents<MonoBehaviour>();
                 foreach (var script in scripts)
                 {
                     if (script != null)
+                    {
+                        script.StopAllCoroutines();
                         script.enabled = false;
+                    }
                 }
-                Destroy(this.gameObject, 5f);
+                Destroy(this.gameObject, 3f);
             }
         }
 
@@ -74,7 +81,7 @@ namespace Assets.Resources.Scripts
                 // Convert dot product to angle
                 float angleToPlayer = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
                 // Check if the player is within 70 degrees in front of the zombie (total 60-degree FOV)
-                return angleToPlayer < 70f;
+                return angleToPlayer < FieldOfView;
             }
             return false;
         }
@@ -117,11 +124,12 @@ namespace Assets.Resources.Scripts
         public virtual void SetStunnedTrue()
         {
             IsStunned = true;
-            
+            Attacking = false;
         }
         public virtual void SetStunnedFalse()
         {
             IsStunned = false;
+            Attacking = false;
         }
     }
 }

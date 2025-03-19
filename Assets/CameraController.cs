@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
         counter++;
         if (counter % CameraCheckEveryHowManyFrames == 0)
         {
-            HandlePinchZoom();
+            //HandlePinchZoom();
             FollowPlayer();
         }
     }

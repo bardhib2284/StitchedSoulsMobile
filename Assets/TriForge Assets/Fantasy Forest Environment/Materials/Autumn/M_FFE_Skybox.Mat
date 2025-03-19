@@ -87,3 +87,4 @@ Material:
     - _GroundColor: {r: 0.47794116, g: 0.26247984, b: 0.03162846, a: 1}
     - _SkyTint: {r: 1, g: 0.8864097, b: 0.74264705, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

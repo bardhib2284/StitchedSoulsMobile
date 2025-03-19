@@ -18,7 +18,7 @@ public class ZombieAI : EnemyAI
 
     void FixedUpdate()
     {
-        if (Target != null && !isChasing)
+        if (Target != null && !isChasing && !Attacking)
         {
             if(IsPlayerInFOV())
             {
@@ -27,7 +27,7 @@ public class ZombieAI : EnemyAI
         }
         if (isMoving && Target != null)
         {
-            if(!IsStunned)
+            if(!IsStunned && !Attacking)
             {
                 ChasePlayer();
             }
@@ -41,6 +41,14 @@ public class ZombieAI : EnemyAI
                 }
             }
         }
+    }
+
+    public float GetDistanceToPlayer()
+    {
+        if (IsPlayerInFOV() && Target != null)
+            return DistanceToPlayer = Vector3.Distance(transform.position, Target.position);
+        else
+            return 1000;
     }
 
     // Call this when the zombie sees the player
@@ -78,6 +86,7 @@ public class ZombieAI : EnemyAI
     {
         base.SetStunnedTrue();
         ZombieAcidAttack.canAttack = false;
+        
     }
 
 }

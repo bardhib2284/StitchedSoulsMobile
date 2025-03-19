@@ -115,7 +115,7 @@ Material:
     - _EdgeSoftness: 3
     - _FogFadeAmount: 1.5
     - _Fog_Influence: 0
-    - _FuzzIntensity: 0.5
+    - _FuzzIntensity: 3
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

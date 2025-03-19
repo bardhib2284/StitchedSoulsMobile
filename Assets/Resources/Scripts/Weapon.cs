@@ -8,17 +8,19 @@ public abstract class Weapon : MonoBehaviour
     public float attackCooldown = 1.0f; // Delay between attacks
     public Animator animator;
     public Collider weaponCollider;
-
+    public PlayerController playerController;
     protected bool canAttack = true;
 
     [SerializeField] private LayerMask enemyLayer; // Layer to identify enemies
 
     public virtual void Start()
     {
-        if (animator == null) animator = GetComponent<Animator>();
+        if (animator == null) animator = GetComponentInParent<Animator>();
         if (weaponCollider != null) weaponCollider.enabled = false;
+        if (playerController == null) playerController = GetComponentInParent<PlayerController>();
     }
 
+    
     public virtual void Attack()
     {
         if (!canAttack) return;

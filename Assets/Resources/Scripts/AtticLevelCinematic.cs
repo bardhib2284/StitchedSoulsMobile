@@ -39,7 +39,7 @@ namespace Assets.Resources.Scripts
             HeadLight.enabled = true;
             Camera.GetComponent<CameraController>().enabled = true;
             Camera.GetComponent<CameraController>().ChangeRotation = true;
-            Camera.GetComponent<CameraController>().RotationRequired = new Vector3(20f,Camera.main.transform.localEulerAngles.y, Camera.main.transform.localEulerAngles.z);
+            Camera.GetComponent<CameraController>().RotationRequired = new Vector3(40f,Camera.main.transform.localEulerAngles.y, Camera.main.transform.localEulerAngles.z);
 
             PlayerJoystick.enabled = true ;
             PlayerController.MoveSpeedHandler = 0.85f;

@@ -11,12 +11,13 @@ public class ZombieAcidAttack : MonoBehaviour
     public float maxAcidDistance = 0.2f; // Distanca maksimale e fluturimit t� acidit
     public float acidSpeed = 5f;   // Shpejt�sia e acidit
     public float attackCooldown = 3f; // Koha midis sulmeve
-
+    public bool Attacking = false;
     private Transform player;
     public bool canAttack = true;
+    public ZombieAI ZombieAI;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform; // Gjej lojtarin
+        ZombieAI = GetComponent<ZombieAI>();
     }
 
     void Update()
@@ -30,111 +31,129 @@ public class ZombieAcidAttack : MonoBehaviour
 
     private IEnumerator ShootAcid()
     {
-        canAttack = false;
-        Animator animator = GetComponent<Animator>();
-        animator.SetTrigger("Bite");
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForSecondsRealtime(0.2f);
-        if (GetComponent<ZombieAI>().DistanceToPlayer <= attackRange)
+        player = ZombieAI.Target;
+        if(player != null)
         {
-            if (!this.GetComponent<EnemyAI>().IsStunned)
+            canAttack = false;
+            Animator animator = GetComponent<Animator>();
+            animator.SetTrigger("Bite");
+            ZombieAI.Attacking = true;
+            ZombieAI.IsStunned = true;
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForSecondsRealtime(0.4f);
+            yield return new WaitForSecondsRealtime(0.4f);
+            if (ZombieAI.GetDistanceToPlayer() <= attackRange)
             {
-                yield return new WaitForEndOfFrame();
-                yield return new WaitForSecondsRealtime(0.2f);
-
-                if (!this.GetComponent<EnemyRagdoll>().mainRigidbody.isKinematic)
+                if (ZombieAI.IsStunned && !ZombieAI.isDead)
                 {
                     yield return new WaitForEndOfFrame();
-                    yield return new WaitForSecondsRealtime(0.2f);
+                    yield return new WaitForSecondsRealtime(0.1f);
 
-                    if (GetComponent<ZombieAI>().DistanceToPlayer <= attackRange)
+                    if (!this.GetComponent<EnemyRagdoll>().mainRigidbody.isKinematic)
                     {
                         yield return new WaitForEndOfFrame();
-                        yield return new WaitForSecondsRealtime(0.2f);
-                        if (!player.GetComponent<PlayerController>().IsRolling() && !player.GetComponent<PlayerController>().Attacking)
+                        yield return new WaitForSecondsRealtime(0.1f);
+
+                        if (ZombieAI.DistanceToPlayer <= attackRange)
                         {
                             yield return new WaitForEndOfFrame();
-                            animator.SetTrigger("Bite");
-                            yield return new WaitForSeconds(0.3f);
-                            player.GetComponent<PlayerController>().enabled = false;
-                            player.GetComponent<PlayerController>().StopAllCoroutines();
-                            var canvas = Object.FindFirstObjectByType<Canvas>();
-                            var CanvasBlocker = canvas.transform.GetChild(canvas.transform.childCount - 1);
-                            CanvasBlocker.gameObject.SetActive(true);
-                            yield return new WaitForSeconds(0.1f);
-
-                            // Llogarit drejtimin drejt lojtarit
-                            Vector3 directionToPlayer = (player.position - firePoint.position).normalized;
-                            // Krijo nj� instance t� acidit
-
-                            yield return new WaitForEndOfFrame();
-                            player.GetComponent<Animator>().SetTrigger("HeadHit");
-                            Camera.main.GetComponent<CameraController>().enabled = false;
-                            var currentCameraRotation = Camera.main.transform.localEulerAngles;
-                            Camera.main.transform.LookAt(player.transform.position);
-                            var cameraDestination = 32;
-                            while (Camera.main.fieldOfView > cameraDestination)
+                            yield return new WaitForSecondsRealtime(0.1f);
+                            if (!player.GetComponent<PlayerController>().IsRolling() && !player.GetComponent<PlayerController>().Attacking)
                             {
-                                Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, cameraDestination / 1.4f, Time.deltaTime * 3f);
                                 yield return new WaitForEndOfFrame();
-                            }
-                            yield return new WaitForSeconds(2f);
-                            cameraDestination = 60;
-                            while (Camera.main.fieldOfView < cameraDestination)
-                            {
-                                Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, cameraDestination * 1.4f, Time.deltaTime * 3f);
-                                yield return new WaitForEndOfFrame();
-                            }
-                            Camera.main.transform.localEulerAngles = currentCameraRotation;
-                            player.GetComponent<Animator>().SetTrigger("Fall");
-                            yield return new WaitForSeconds(0.1f);
-                            // Merr drejtimin nga zombie tek lojetari
-                            Vector3 knockbackDirection = (player.transform.position - transform.position).normalized;
-                            // Shto një forcë në atë drejtim për ta larguar lojetarin nga zombie
-                            if (!player.GetComponent<Rigidbody>().isKinematic)
-                            {
-                                player.GetComponent<Rigidbody>().AddForce(knockbackDirection * 5f + Vector3.up * 2f, ForceMode.Impulse);
-                            }
+                                yield return new WaitForSeconds(0.1f);
+                                player.GetComponent<PlayerController>().enabled = false;
+                                player.GetComponent<PlayerController>().StopAllCoroutines();
+                                var canvas = Object.FindFirstObjectByType<Canvas>();
+                                var CanvasBlocker = canvas.transform.GetChild(canvas.transform.childCount - 1);
+                                CanvasBlocker.gameObject.SetActive(true);
 
-                            yield return new WaitForSeconds(1f);
-                            player.GetComponent<Animator>().SetTrigger("StandUp");
-                            yield return new WaitForSecondsRealtime(0.5f);
-                            player.GetComponent<PlayerController>().enabled = true;
-                            Camera.main.GetComponent<CameraController>().enabled = true;
-                            CanvasBlocker.gameObject.SetActive(false);
-                            GetComponent<EnemyAI>().IsStunned = false;
-                            // Prisni pak para se t� lejojm� nj� sulm tjet�r
-                            yield return new WaitForSeconds(attackCooldown);
-                            canAttack = true;
+                                // Llogarit drejtimin drejt lojtarit
+                                Vector3 directionToPlayer = (player.position - firePoint.position).normalized;
+                                // Krijo nj� instance t� acidit
+
+                                yield return new WaitForEndOfFrame();
+                                player.GetComponent<Animator>().SetTrigger("HeadHit");
+                                Camera.main.GetComponent<CameraController>().enabled = false;
+                                var currentCameraRotation = Camera.main.transform.localEulerAngles;
+                                Camera.main.transform.LookAt(player.transform.position);
+                                var cameraDestination = 32;
+                                while (Camera.main.fieldOfView > cameraDestination)
+                                {
+                                    Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, cameraDestination / 1.4f, Time.deltaTime * 3f);
+                                    yield return new WaitForEndOfFrame();
+                                }
+                                yield return new WaitForSeconds(2f);
+                                cameraDestination = 60;
+                                while (Camera.main.fieldOfView < cameraDestination)
+                                {
+                                    Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, cameraDestination * 1.4f, Time.deltaTime * 3f);
+                                    yield return new WaitForEndOfFrame();
+                                }
+                                Camera.main.transform.localEulerAngles = currentCameraRotation;
+                                player.GetComponent<Animator>().SetTrigger("Fall");
+                                yield return new WaitForSeconds(0.1f);
+                                // Merr drejtimin nga zombie tek lojetari
+                                Vector3 knockbackDirection = (player.transform.position - transform.position).normalized;
+                                // Shto një forcë në atë drejtim për ta larguar lojetarin nga zombie
+                                if (!player.GetComponent<Rigidbody>().isKinematic)
+                                {
+                                    player.GetComponent<Rigidbody>().AddForce(knockbackDirection * 5f + Vector3.up * 2f, ForceMode.Impulse);
+                                }
+
+                                yield return new WaitForSeconds(1f);
+                                player.GetComponent<Animator>().SetTrigger("StandUp");
+                                yield return new WaitForSecondsRealtime(0.5f);
+                                player.GetComponent<PlayerController>().enabled = true;
+                                Camera.main.GetComponent<CameraController>().enabled = true;
+                                CanvasBlocker.gameObject.SetActive(false);
+                                GetComponent<EnemyAI>().IsStunned = false;
+                                ZombieAI.Attacking = false;
+                                // Prisni pak para se t� lejojm� nj� sulm tjet�r
+                                yield return new WaitForSeconds(attackCooldown);
+                                canAttack = true;
+                                ZombieAI.IsStunned = false;
+                            }
+                            else
+                            {
+                                yield return new WaitForSeconds(attackCooldown);
+                                canAttack = true;
+                                ZombieAI.Attacking = false; ZombieAI.IsStunned = false;
+
+                            }
                         }
                         else
                         {
-                            animator.SetTrigger("Walk");
-                            canAttack = true;
+                            yield return new WaitForSeconds(attackCooldown);
+                            canAttack = true; ZombieAI.Attacking = false; ZombieAI.IsStunned = false;
+
+
                         }
                     }
                     else
                     {
-                        animator.SetTrigger("Walk");
-                        canAttack = true;
+                        yield return new WaitForSeconds(attackCooldown);
+                        canAttack = true; ZombieAI.Attacking = false;
+                        ZombieAI.IsStunned = false;
+
                     }
                 }
                 else
                 {
-                    animator.SetTrigger("Walk");
-                    canAttack = true;
+                    yield return new WaitForSeconds(attackCooldown);
+                    canAttack = true; ZombieAI.Attacking = false;
+                    ZombieAI.IsStunned = false;
+
                 }
             }
             else
             {
-                animator.SetTrigger("Walk");
-                canAttack = true;
+                yield return new WaitForSeconds(attackCooldown);
+                canAttack = true; ZombieAI.Attacking = false;
+                ZombieAI.IsStunned = false;
+
             }
         }
-        else
-        {
-            animator.SetTrigger("Walk");
-            canAttack = true;
-        }
+        
     }
 }

@@ -33,6 +33,7 @@ public class EnemyVisibilityTrigger : MonoBehaviour
                 }
                 if (enemyRenderer != null)
                 {
+                    other.transform.GetChild(2).gameObject.SetActive(true);
                     enemyRenderer.material.SetFloat(visibilityAlphaID, 1);
                     StartCoroutine(FadeOutline(enemyRenderer, 1)); // Fade in
                     if (Parent.GetComponent<PlayerController>().CurrentEquipedWeapon is GunWeapon)
@@ -73,11 +74,14 @@ public class EnemyVisibilityTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("OnTriggerExit" + other.gameObject.name);
         if (other.CompareTag("Enemy")) // Ensure enemies have the "Enemy" tag
         {
             Renderer enemyRenderer = other.transform.GetChild(1).GetComponent<Renderer>();
             if (enemyRenderer != null)
             {
+                if(other != null)
+                    other.transform.GetChild(2).gameObject.SetActive(false);
                 if (Parent.GetComponent<PlayerController>().CurrentEquipedWeapon is GunWeapon)
                 {
                     var enemy = other.transform.GetComponent<EnemyAI>();

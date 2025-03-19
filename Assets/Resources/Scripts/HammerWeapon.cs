@@ -27,30 +27,35 @@ public class HammerWeapon : Weapon
     }
     IEnumerator DramaEffect()
     {
-        Time.timeScale = 0.25f;
+        playerController.enabled = false;
+        Time.timeScale = 0.2f;
         yield return new WaitForSecondsRealtime(1.5f);
+        playerController.enabled = true;
         Time.timeScale = 1f;
     }
     public override void Attack()
     {
         if (!canAttack) return;
-        canAttack = false;
-        if(animator == null)
+        if(playerController.PlayerStamina.UseStamina(3f))
         {
-            animator = GetComponentInParent<Animator>();
-        }
-        
-        // Play attack animation
-        if (animator != null)
-        {
-            animator.SetTrigger("HammerAttack");
-        }
+            canAttack = false;
+            if (animator == null)
+            {
+                animator = GetComponentInParent<Animator>();
+            }
 
-        // Enable the collider during animation for hit detection
-        Invoke(nameof(EnableWeaponCollider), 0.35f); // Enable shortly after animation starts
-        Invoke(nameof(DisableWeaponCollider), 0.88f); // Disable after impact
+            // Play attack animation
+            if (animator != null)
+            {
+                animator.SetTrigger("HammerAttack");
+            }
 
-        // Reset cooldown
-        Invoke(nameof(ResetAttack), attackCooldown);
+            // Enable the collider during animation for hit detection
+            Invoke(nameof(EnableWeaponCollider), 0.35f); // Enable shortly after animation starts
+            Invoke(nameof(DisableWeaponCollider), 0.88f); // Disable after impact
+
+            // Reset cooldown
+            Invoke(nameof(ResetAttack), attackCooldown);
+        }
     }
 }

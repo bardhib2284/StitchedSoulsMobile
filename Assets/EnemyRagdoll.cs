@@ -163,7 +163,10 @@ public class EnemyRagdoll : MonoBehaviour
         {
             isRagdoll = false;
             isGettingUp = false;
-
+            foreach (var rb in ragdollBodies)
+            {
+                rb.interpolation = RigidbodyInterpolation.None;
+            }
             // **Step 1: Find Hips Transform to Determine Facing Direction**
             Transform hipsTransform = ragdollBodies.FirstOrDefault(rb => rb.name.ToLower().Contains("hips"))?.transform;
             yield return new WaitForEndOfFrame();
@@ -174,10 +177,7 @@ public class EnemyRagdoll : MonoBehaviour
                 // **Move Root to Hips Position**
                 transform.position = hipsTransform.position;
                 yield return new WaitForEndOfFrame();
-                if (transform.position != hipsTransform.position)
-                {
-                    transform.position = hipsTransform.position;
-                }
+
                 // **Step 2: Adjust Rotation Based on Face-Up or Face-Down**
                 float hipsUpDot = Vector3.Dot(hipsTransform.up, Vector3.up);
 
@@ -198,10 +198,7 @@ public class EnemyRagdoll : MonoBehaviour
                 mainRigidbody.useGravity = true;
             }
             if (mainCollider != null) mainCollider.enabled = true;
-            foreach (var rb in ragdollBodies)
-            {
-                rb.interpolation = RigidbodyInterpolation.None;
-            }
+
             // **Step 5: Re-enable Animator & Play Stand-Up Animation**
             animator.enabled = true;
             animator.SetTrigger("StandUp");
