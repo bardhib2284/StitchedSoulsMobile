@@ -49,8 +49,11 @@ namespace Assets.Resources.Scripts
                 isDead = true;
                 var scripts = GetComponents<MonoBehaviour>();
                 foreach (var script in scripts)
-                    script.enabled = false;
-                Destroy(this.gameObject, 3f);
+                {
+                    if (script != null)
+                        script.enabled = false;
+                }
+                Destroy(this.gameObject, 5f);
             }
         }
 
@@ -63,7 +66,7 @@ namespace Assets.Resources.Scripts
 
         public virtual bool IsPlayerInFOV()
         {
-            if(Target != null)
+            if (Target != null)
             {
                 Vector3 directionToPlayer = (Target.position - transform.position).normalized;
                 float dotProduct = Vector3.Dot(transform.forward, directionToPlayer);
@@ -78,7 +81,7 @@ namespace Assets.Resources.Scripts
 
         public virtual void ChasePlayer()
         {
-            if (!IsStunned)
+            if (!IsStunned || !isDead)
             {
                 if (Target == null) return;
 

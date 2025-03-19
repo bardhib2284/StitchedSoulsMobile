@@ -27,8 +27,8 @@ public class HammerWeapon : Weapon
     }
     IEnumerator DramaEffect()
     {
-        Time.timeScale = 0.15f;
-        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 0.25f;
+        yield return new WaitForSecondsRealtime(1.5f);
         Time.timeScale = 1f;
     }
     public override void Attack()

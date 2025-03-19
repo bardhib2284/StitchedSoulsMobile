@@ -53,19 +53,21 @@ public class EnemyVisibilityTrigger : MonoBehaviour
         {
             float startValue = enemyRenderer.material.GetFloat(isLitID);
             float timeElapsed = 0;
-
-            while (timeElapsed < fadeDuration)
+            if(startValue < targetValue)
             {
-                if(enemyRenderer != null)
+                while (timeElapsed < fadeDuration)
                 {
-                    timeElapsed += Time.deltaTime;
-                    float newValue = Mathf.Lerp(startValue, targetValue, timeElapsed / fadeDuration);
-                    enemyRenderer.material.SetFloat(isLitID, newValue);
-                    yield return null;
+                    if (enemyRenderer != null)
+                    {
+                        timeElapsed += Time.deltaTime;
+                        float newValue = Mathf.Lerp(startValue, targetValue, timeElapsed / fadeDuration);
+                        enemyRenderer.material.SetFloat(isLitID, newValue);
+                        yield return null;
 
+                    }
                 }
+                enemyRenderer.material.SetFloat(isLitID, targetValue);
             }
-            enemyRenderer.material.SetFloat(isLitID, targetValue);
         }
     }
 

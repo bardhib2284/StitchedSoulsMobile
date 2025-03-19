@@ -51,17 +51,17 @@ public class ZombieAcidAttack : MonoBehaviour
                     {
                         yield return new WaitForEndOfFrame();
                         yield return new WaitForSecondsRealtime(0.2f);
-                        if (!player.GetComponent<PlayerController>().IsRolling())
+                        if (!player.GetComponent<PlayerController>().IsRolling() && !player.GetComponent<PlayerController>().Attacking)
                         {
                             yield return new WaitForEndOfFrame();
                             animator.SetTrigger("Bite");
-                            GetComponent<EnemyAI>().IsStunned = true;
+                            yield return new WaitForSeconds(0.3f);
                             player.GetComponent<PlayerController>().enabled = false;
                             player.GetComponent<PlayerController>().StopAllCoroutines();
                             var canvas = Object.FindFirstObjectByType<Canvas>();
                             var CanvasBlocker = canvas.transform.GetChild(canvas.transform.childCount - 1);
                             CanvasBlocker.gameObject.SetActive(true);
-                            yield return new WaitForSeconds(0.6f);
+                            yield return new WaitForSeconds(0.1f);
 
                             // Llogarit drejtimin drejt lojtarit
                             Vector3 directionToPlayer = (player.position - firePoint.position).normalized;
