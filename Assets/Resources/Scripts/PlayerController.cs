@@ -97,16 +97,13 @@ public class PlayerController : MonoBehaviour
         if (this.enabled && !Attacking)
         {
             var animatorinfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
-            var current_animation = animatorinfo[0].clip.name;
-            if (!current_animation.Contains("Idle"))
+            if (animatorinfo.Length >= 1)
             {
-                var IdleAnimation = Random.Range(0, 101);
-                if (IdleAnimation >= 50)
+                var current_animation = animatorinfo[0].clip.name;
+                if (!current_animation.Contains("Idle"))
                 {
-                    AnimatorController.SetTrigger("Idle");
-                }
-                else
                     AnimatorController.SetTrigger("HappyIdle");
+                }
             }
         }
     }
@@ -123,16 +120,13 @@ public class PlayerController : MonoBehaviour
         if (this.enabled && !Attacking)
         {
             var animatorinfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
-            var current_animation = animatorinfo[0].clip.name;
-            if (current_animation.Contains("Walk"))
-                yield break;
-            var walkAnimation = Random.Range(0, 101);
-            if (walkAnimation >= 50)
+            if(animatorinfo.Length >= 1)
             {
+                var current_animation = animatorinfo[0].clip.name;
+                if (current_animation.Contains("Walk"))
+                    yield break;
                 AnimatorController.SetTrigger("SneakyWalk");
             }
-            else
-                AnimatorController.SetTrigger("Walk");
         }
     }
     public void Move()
@@ -244,10 +238,13 @@ public class PlayerController : MonoBehaviour
                     currentMoveSpeed = moveSpeed; // Full speed above 45%
 
                     var animatorInfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
-                    var current_animation = animatorInfo[0].clip.name;
-                    if (current_animation != "Run")
+                    if(animatorInfo.Length >= 1)
                     {
-                        AnimatorController.SetTrigger("Run");
+                        var current_animation = animatorInfo[0].clip?.name;
+                        if (current_animation != "Run")
+                        {
+                            AnimatorController.SetTrigger("Run");
+                        }
                     }
                 }
             }
@@ -291,8 +288,6 @@ public class PlayerController : MonoBehaviour
     public void AttackCoroutine()
     {
         StartCoroutine(Attack());
-
-        
     }
 
     IEnumerator Attack()

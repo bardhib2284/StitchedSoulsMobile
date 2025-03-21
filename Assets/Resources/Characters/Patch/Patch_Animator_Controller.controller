@@ -173,7 +173,7 @@ AnimatorStateMachine:
     m_Position: {x: 670, y: 690, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1851694535896803490}
-    m_Position: {x: 308.12292, y: 659.8201, z: 0}
+    m_Position: {x: 300, y: 650, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -2643632414354656965}
@@ -203,7 +203,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SneakyWalk 0
+  m_Name: SneakyWalk
   m_Speed: 3
   m_CycleOffset: 0
   m_Transitions: []
@@ -255,7 +255,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Armature|mixamo_com|Layer0
+  m_Name: Roll
   m_Speed: 2.54
   m_CycleOffset: 0
   m_Transitions:
@@ -427,7 +427,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mixamo_com
+  m_Name: HammerAttack
   m_Speed: 3
   m_CycleOffset: 0
   m_Transitions: []
@@ -778,7 +778,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|Armature|mixamo_com|Layer0
+  m_Name: HeadHit
   m_Speed: 0.25
   m_CycleOffset: 0
   m_Transitions:

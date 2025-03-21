@@ -1,92 +1,78 @@
-using Assets.Resources.Scripts;
 using System.Collections;
 using UnityEngine;
 
 public class ZombieAI : EnemyAI
 {
-    private bool isChasing = false;
     private bool isMoving = false;
-    ZombieAcidAttack ZombieAcidAttack;
-    EnemyRagdoll EnemyRagdoll;
-    public GameObject AcidPrefab;
-    void Start()
-    {
-        base.Start();
-        ZombieAcidAttack = GetComponent<ZombieAcidAttack>();
-        EnemyRagdoll = GetComponent<EnemyRagdoll>();
-    }
+    private ZombieAcidAttack zombieAcidAttack;
+    private EnemyRagdoll enemyRagdoll;
 
+    private bool HasRoared = false;
+    void Awake()
+    {
+        base.Awake();
+        zombieAcidAttack = GetComponent<ZombieAcidAttack>();
+        enemyRagdoll = GetComponent<EnemyRagdoll>();
+    }
+    public bool IsRagdollActive()
+    {
+        return enemyRagdoll.IsRagdollActive();
+    }
     void FixedUpdate()
     {
-        if (Target != null && !isChasing && !Attacking)
+        if (isDead) return;
+
+        // Always rotate to player if in Chasing state
+        if (currentState == EnemyState.Chasing && Target != null)
         {
-            if(IsPlayerInFOV())
-            {
-                StartChasing();
-            }
+            FaceTarget(); // Ensures the enemy is facing the player even when not moving
         }
-        if (isMoving && Target != null)
+
+        // Start chasing if player enters FOV
+        if (Target != null && currentState == EnemyState.Idle && IsPlayerInFOV())
         {
-            if(!IsStunned && !Attacking)
+            StartCoroutine(StartChase());
+        }
+
+        if (isMoving && currentState == EnemyState.Chasing)
+        {
+            ChasePlayer();
+
+            float distanceToPlayer = Vector3.Distance(transform.position, Target.position);
+            if (distanceToPlayer <= zombieAcidAttack.attackRange && zombieAcidAttack.canAttack)
             {
-                ChasePlayer();
-            }
-            if (Target != null)
-            {
-                var DistanceToPlayer = Vector3.Distance(transform.position, Target.position);
-                if (DistanceToPlayer <= ZombieAcidAttack.attackRange && ZombieAcidAttack.canAttack)
+                float angle = Vector3.Angle(transform.forward, (Target.position - transform.position).normalized);
+                if (angle < fieldOfView)
                 {
-                    if(!IsStunned && !EnemyRagdoll.mainRigidbody.isKinematic)
-                        GetComponent<ZombieAcidAttack>().ShootAcidCor();
+                    StartCoroutine(zombieAcidAttack.ShootAcid());
                 }
             }
         }
     }
 
-    public float GetDistanceToPlayer()
+    private IEnumerator StartChase()
     {
-        if (IsPlayerInFOV() && Target != null)
-            return DistanceToPlayer = Vector3.Distance(transform.position, Target.position);
+        if(!HasRoared)
+        {
+            Animator.SetTrigger("Roar");
+            HasRoared = true;
+            yield return new WaitForSeconds(2f);
+        }
         else
-            return 1000;
+        {
+            currentState = EnemyState.Chasing;
+            isMoving = true;
+            Animator.CrossFade("Walk", 0.1f);
+        }
     }
 
-    // Call this when the zombie sees the player
-    public void StartChasing()
+    // New method to keep the enemy always facing the player
+    private void FaceTarget()
     {
-        isChasing = true;
-        StartCoroutine(Chase());
+        if (Target == null) return;
+
+        Vector3 direction = (Target.position - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
-
-
-    public IEnumerator Chase()
-    {
-        transform.LookAt(Target.position);
-        GetComponent<Animator>().SetTrigger("Roar");
-        yield return new WaitForSeconds(2f);
-        isMoving = true;
-        GetComponent<Animator>().SetTrigger("Walk");
-    }
-    // Call this when the zombie loses sight of the player
-    public void StopChasing()
-    {
-        isChasing = false;
-        isMoving = false;
-        rb.linearVelocity = Vector3.zero; // Stop movement when the player is lost
-    }
-
-
-    public override void SetStunnedFalse()
-    {
-        base.SetStunnedFalse();
-        ZombieAcidAttack.canAttack = true;
-    }
-
-    public override void SetStunnedTrue()
-    {
-        base.SetStunnedTrue();
-        ZombieAcidAttack.canAttack = false;
-        
-    }
-
 }

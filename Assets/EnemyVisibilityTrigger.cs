@@ -19,7 +19,6 @@ public class EnemyVisibilityTrigger : MonoBehaviour
     {
         if (other.CompareTag("Enemy")) // Ensure enemies have the "Enemy" tag
         {
-            
             var enemyAI = other.GetComponent<EnemyAI>();
             
             if (enemyAI != null)

@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 88c05e668a404cb4fb0dc60c176aeff3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: -4.892
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88c05e668a404cb4fb0dc60c176aeff3,
         type: 3}
@@ -91,6 +91,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4735636805539758665}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 88c05e668a404cb4fb0dc60c176aeff3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6142120492599669430}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 88c05e668a404cb4fb0dc60c176aeff3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7113301845473399233}
   m_SourcePrefab: {fileID: 100100000, guid: 88c05e668a404cb4fb0dc60c176aeff3, type: 3}
 --- !u!1 &671380507198284558 stripped
 GameObject:
@@ -116,6 +124,13 @@ MonoBehaviour:
   moveSpeed: 3
   stoppingDistance: 1.5
   Health: 0
+  IsStunned: 0
+  Attacking: 0
+  DistanceToPlayer: 0
+  HealthUI: {fileID: 0}
+  MaxHealth: 100
+  CurrentHealth: 0
+  FieldOfView: 70
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -133,6 +148,55 @@ MonoBehaviour:
   CanJump: 0
   TimeLastJumped: 0
   WantsToJump: 0
+--- !u!54 &6142120492599669430
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671380507198284558}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!95 &7113301845473399233
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671380507198284558}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f44196fd726748d49a4045cce3d387ca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &2518546902695520970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2838391200542782613, guid: 88c05e668a404cb4fb0dc60c176aeff3,

@@ -47,14 +47,16 @@ public abstract class Weapon : MonoBehaviour
     // 🔹 Now detecting enemy collisions
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("on trigger enter : " + other.gameObject.name);
+        Debug.Log("on trigger enter weapon : " + other.gameObject.name);
         if (((1 << other.gameObject.layer) & enemyLayer) != 0) // Check if object is on the enemy layer
         {
             if(other.GetComponent<EnemyAI>() != null)
             {
                 EnemyAI enemyAI = other.GetComponent<EnemyAI>();
                 enemyAI.TakeDamage(damage);
+
                 ApplyEffect(other);
+                
             }
         }
     }
