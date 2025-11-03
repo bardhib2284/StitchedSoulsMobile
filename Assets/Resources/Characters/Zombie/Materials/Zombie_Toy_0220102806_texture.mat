@@ -103,7 +103,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EdgeSoftness: 0.3
     - _EnvironmentReflections: 1
-    - _FuzzIntensity: 0.5
+    - _FuzzIntensity: 2
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

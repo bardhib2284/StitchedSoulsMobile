@@ -1,5 +1,6 @@
 ﻿using Assets.Resources.Scripts;
 using UnityEngine;
+using System.Collections.Generic; // ✅ Required for HashSet
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public abstract class Weapon : MonoBehaviour
 
     [SerializeField] private LayerMask enemyLayer; // Layer to identify enemies
 
+
     public virtual void Start()
     {
         if (animator == null) animator = GetComponentInParent<Animator>();
@@ -20,11 +22,11 @@ public abstract class Weapon : MonoBehaviour
         if (playerController == null) playerController = GetComponentInParent<PlayerController>();
     }
 
-    
     public virtual void Attack()
     {
         if (!canAttack) return;
         canAttack = false;
+
 
         // Play attack animation
         if (animator != null)
@@ -44,19 +46,21 @@ public abstract class Weapon : MonoBehaviour
     protected void DisableWeaponCollider() { if (weaponCollider != null) weaponCollider.enabled = false; }
     protected void ResetAttack() { canAttack = true; }
 
-    // 🔹 Now detecting enemy collisions
+    // ✅ Now detecting enemy collisions with prevention for multiple hits
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("on trigger enter weapon : " + other.gameObject.name);
+
         if (((1 << other.gameObject.layer) & enemyLayer) != 0) // Check if object is on the enemy layer
         {
-            if(other.GetComponent<EnemyAI>() != null)
+            if (other.GetComponent<EnemyAI>() != null)
             {
                 EnemyAI enemyAI = other.GetComponent<EnemyAI>();
+                if (!enemyAI.CanBeInterrupted)
+                    return;
                 enemyAI.TakeDamage(damage);
 
                 ApplyEffect(other);
-                
             }
         }
     }

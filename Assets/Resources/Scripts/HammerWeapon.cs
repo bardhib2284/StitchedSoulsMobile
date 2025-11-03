@@ -1,4 +1,5 @@
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HammerWeapon : Weapon
@@ -6,47 +7,23 @@ public class HammerWeapon : Weapon
     public float knockbackForce = 10f;
     public float knockbackUpward = 2f;
     public int DamageOverride;
+
+    public new HashSet<Collider> hitEnemies = new HashSet<Collider>(); // 🛑 Prevents double damage
+
     public override void Start()
     {
         base.Start();
         damage = DamageOverride;
     }
-    public override void ApplyEffect(Collider enemy)
-    {
-        EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
-        if (enemyAI.health <= 0)
-        {
-            EnemyRagdoll enemyRagdoll = enemy.GetComponent<EnemyRagdoll>();
 
-            if (enemyRagdoll != null)
-            {
-                Vector3 knockbackDirection = (enemy.transform.position - transform.position).normalized;
-                knockbackDirection.y += knockbackUpward; // Add some upward lift
-
-                enemyRagdoll.ActivateRagdoll(knockbackDirection, knockbackForce);
-                StartCoroutine(DramaEffect());
-            }
-        }
-        else
-        {
-            enemyAI.GetHit();
-        }
-        
-    }
-    IEnumerator DramaEffect()
-    {
-        playerController.enabled = false;
-        Time.timeScale = 0.2f;
-        yield return new WaitForSecondsRealtime(1.5f);
-        playerController.enabled = true;
-        Time.timeScale = 1f;
-    }
     public override void Attack()
     {
         if (!canAttack) return;
-        if(playerController.PlayerStamina.UseStamina(3f))
+        if (playerController.PlayerStamina.UseStamina(3f))
         {
             canAttack = false;
+            hitEnemies.Clear(); // 🔄 Reset hit list for this attack
+
             if (animator == null)
             {
                 animator = GetComponentInParent<Animator>();
@@ -58,12 +35,48 @@ public class HammerWeapon : Weapon
                 animator.SetTrigger("HammerAttack");
             }
 
-            // Enable the collider during animation for hit detection
-            Invoke(nameof(EnableWeaponCollider), 0.25f); // Enable shortly after animation starts
+            // Enable collider for hit detection (shortly after animation starts)
+            Invoke(nameof(EnableWeaponCollider), 0.25f);
             Invoke(nameof(DisableWeaponCollider), 0.68f); // Disable after impact
 
             // Reset cooldown
             Invoke(nameof(ResetAttack), attackCooldown);
         }
+    }
+
+    public override void ApplyEffect(Collider enemy)
+    {
+        // 🛑 Prevents multiple hits on the same enemy per swing
+        if (hitEnemies.Contains(enemy)) return;
+        hitEnemies.Add(enemy);
+
+        EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
+
+        if (enemyAI.health <= 0) // If enemy is dead, apply ragdoll
+        {
+            EnemyRagdoll enemyRagdoll = enemy.GetComponent<EnemyRagdoll>();
+
+            if (enemyRagdoll != null)
+            {
+                Vector3 knockbackDirection = (enemy.transform.position - transform.position).normalized;
+                knockbackDirection.y += knockbackUpward; // Add some upward force
+
+                enemyRagdoll.ActivateRagdoll(knockbackDirection, knockbackForce);
+                StartCoroutine(DramaEffect());
+            }
+        }
+        else
+        {
+            enemyAI.GetHit();
+        }
+    }
+
+    IEnumerator DramaEffect()
+    {
+        playerController.enabled = false;
+        Time.timeScale = 0.2f;
+        yield return new WaitForSecondsRealtime(1.5f);
+        playerController.enabled = true;
+        Time.timeScale = 1f;
     }
 }

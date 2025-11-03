@@ -35,10 +35,10 @@ public class EnemyVisibilityTrigger : MonoBehaviour
                     other.transform.GetChild(2).gameObject.SetActive(true);
                     enemyRenderer.material.SetFloat(visibilityAlphaID, 1);
                     StartCoroutine(FadeOutline(enemyRenderer, 1)); // Fade in
-                    if (Parent.GetComponent<PlayerController>().CurrentEquipedWeapon is GunWeapon)
+                    if (Parent.GetComponent<PlayerController>().CurrentEquippedWeapon is GunWeapon)
                     {
                         var enemy = other.transform.GetComponent<EnemyAI>();
-                        (Parent.GetComponent<PlayerController>().CurrentEquipedWeapon as GunWeapon).AddEnemy(enemy);
+                        (Parent.GetComponent<PlayerController>().CurrentEquippedWeapon as GunWeapon).AddEnemy(enemy);
 
                     }
                 }
@@ -81,10 +81,10 @@ public class EnemyVisibilityTrigger : MonoBehaviour
             {
                 if(other != null)
                     other.transform.GetChild(2).gameObject.SetActive(false);
-                if (Parent.GetComponent<PlayerController>().CurrentEquipedWeapon is GunWeapon)
+                if (Parent.GetComponent<PlayerController>().CurrentEquippedWeapon is GunWeapon)
                 {
                     var enemy = other.transform.GetComponent<EnemyAI>();
-                    (Parent.GetComponent<PlayerController>().CurrentEquipedWeapon as GunWeapon).RemoveEnemy(enemy);
+                    (Parent.GetComponent<PlayerController>().CurrentEquippedWeapon as GunWeapon).RemoveEnemy(enemy);
                 }
             }
         }

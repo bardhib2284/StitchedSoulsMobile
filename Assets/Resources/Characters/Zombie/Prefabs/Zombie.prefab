@@ -1223,7 +1223,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3615865835091201116}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.07388382, y: 0.59988356, z: 0.031130731, w: 0.79606014}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.333333, y: 3.333333, z: 3.333333}
   m_ConstrainProportionsScale: 0
@@ -1326,7 +1326,7 @@ LookAtConstraint:
   m_GameObject: {fileID: 3615865835091201116}
   m_Enabled: 1
   serializedVersion: 2
-  m_Weight: 0
+  m_Weight: 0.912
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_RotationOffset: {x: 0, y: 0, z: 0}
   m_Roll: 3
@@ -2606,6 +2606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  CanBeInterrupted: 1
   Target: {fileID: 0}
   Animator: {fileID: 0}
   PlayerController: {fileID: 0}
@@ -2633,7 +2634,7 @@ MonoBehaviour:
   acidPrefab: {fileID: 645582094145115462, guid: d3cf11ed13acc42429261a2687336e5e,
     type: 3}
   firePoint: {fileID: 2980609251925989957}
-  attackRange: 0.35
+  attackRange: 0.4
   attackCooldown: 3
   canAttack: 1
 --- !u!136 &7145373961863144829

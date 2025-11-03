@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Canvas
   - Obstacle
+  - CanvasBlocker
   layers:
   - Default
   - TransparentFX

@@ -18,7 +18,7 @@ public class PlayerStamina : MonoBehaviour
     void Start()
     {
         currentStamina = maxStamina;
-        if (staminaUI != null) staminaUI.SetStamina(20);
+        if (staminaUI != null) staminaUI.SetStamina(currentStamina);
 
     }
 

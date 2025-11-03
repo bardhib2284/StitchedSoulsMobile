@@ -135,7 +135,6 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     {
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
-        Parent.Idle();
     }
 
     protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)

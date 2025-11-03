@@ -252,8 +252,8 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.399662
-        functionName: FinishAttack
+      - time: 0.70074815
+        functionName: CheckAttackState
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 5589f0640d530f447a0fac0ce093e394,
           type: 3}

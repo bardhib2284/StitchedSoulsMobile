@@ -12,7 +12,7 @@ public class ZombieAcidAttack : MonoBehaviour
 
     private ZombieAI zombieAI;
     private Transform player;
-
+    
     void Awake()
     {
         zombieAI = GetComponent<ZombieAI>();
@@ -41,7 +41,7 @@ public class ZombieAcidAttack : MonoBehaviour
         zombieAI.Animator.SetTrigger("Bite");
 
         yield return new WaitForSeconds(0.8f); // Delay before checking again
-
+        zombieAI.CanBeInterrupted = false;
         // **Mid-Attack Check: Did the zombie die before finishing attack?**
         if (zombieAI.IsRagdollActive() || zombieAI.isDead)
         {
@@ -54,6 +54,7 @@ public class ZombieAcidAttack : MonoBehaviour
         distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer > attackRange || player.GetComponent<PlayerController>().IsRolling())
         {
+            yield return new WaitForSeconds(3f);
             CancelAttack();
             yield break;
         }
@@ -63,9 +64,7 @@ public class ZombieAcidAttack : MonoBehaviour
         {
             PlayerController playerController = player.GetComponent<PlayerController>();
             Animator playerAnimator = player.GetComponent<Animator>();
-            playerAnimator.enabled = false;
-            var canvas = Object.FindFirstObjectByType<Canvas>();
-            var CanvasBlocker = canvas.transform.GetChild(canvas.transform.childCount - 1);
+            var CanvasBlocker = zombieAI.CanvasBlocker;
             CanvasBlocker.gameObject.SetActive(true);
             // **Disable Player Movement**
             playerController.enabled = false;
@@ -117,7 +116,10 @@ public class ZombieAcidAttack : MonoBehaviour
             // **Unblock Player & UI**
             yield return new WaitForSeconds(0.5f);
             playerController.enabled = true;
+            playerController.AnimatorController.enabled = true;
+            playerController.SetIsAttackingFalse();
             CanvasBlocker.gameObject.SetActive(false);
+            zombieAI.CanBeInterrupted = true;
         }
 
         // **Resume Chasing**

@@ -79,7 +79,10 @@ public class EnemyRagdoll : MonoBehaviour
         {
             pushBody = ragdollBodies[0];
         }
-
+        else
+        {
+            pushBody.interpolation = RigidbodyInterpolation.Interpolate;
+        }
         if (!pushBody.isKinematic)
         {
             pushBody.AddForce(forceDirection * forceAmount, ForceMode.Impulse);

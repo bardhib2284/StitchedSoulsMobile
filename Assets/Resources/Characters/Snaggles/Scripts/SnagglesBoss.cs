@@ -18,9 +18,12 @@ public class SnagglesBoss : MonoBehaviour
     void Start()
     {
         // Auto-assign abilities if attached to Snaggles
-        abilities.AddRange(GetComponents<BossAbility>());
-        StartCoroutine(CheckAndRotate());
-        lastAbilityCheckTime = Time.time * 20f;
+        if(!GetComponent<EnemyAI>().JumpScare)
+        {
+            abilities.AddRange(GetComponents<BossAbility>());
+            StartCoroutine(CheckAndRotate());
+            lastAbilityCheckTime = Time.time * 20f;
+        }
     }
 
     void Update()
