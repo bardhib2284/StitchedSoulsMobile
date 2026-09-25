@@ -1,5 +1,6 @@
 ﻿using Assets.Resources.Scripts;
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic; // ✅ Required for HashSet
 
 public abstract class Weapon : MonoBehaviour
@@ -14,37 +15,54 @@ public abstract class Weapon : MonoBehaviour
 
     [SerializeField] private LayerMask enemyLayer; // Layer to identify enemies
 
+    // ✅ Cached animator parameter hash
+    protected int attackHashId;
+
 
     public virtual void Start()
     {
         if (animator == null) animator = GetComponentInParent<Animator>();
         if (weaponCollider != null) weaponCollider.enabled = false;
         if (playerController == null) playerController = GetComponentInParent<PlayerController>();
+
+        // ✅ Cache animator hash for better performance
+        attackHashId = Animator.StringToHash("Attack");
     }
 
     public virtual void Attack()
     {
         if (!canAttack) return;
-        canAttack = false;
 
+        // ✅ OPTIMIZATION: Use coroutine instead of Invoke for better control and GC
+        StartCoroutine(AttackCoroutine());
+    }
+
+    // ✅ NEW: Coroutine-based attack handling
+    protected virtual IEnumerator AttackCoroutine()
+    {
+        canAttack = false;
 
         // Play attack animation
         if (animator != null)
         {
-            animator.SetTrigger("Attack");
+            animator.SetTrigger(attackHashId);
         }
 
-        // Enable the collider during animation for hit detection
-        Invoke(nameof(EnableWeaponCollider), 0.1f); // Enable shortly after animation starts
-        Invoke(nameof(DisableWeaponCollider), 0.3f); // Disable after impact
+        // Enable collider for hit detection
+        yield return new WaitForSeconds(0.1f);
+        EnableWeaponCollider();
 
-        // Reset cooldown
-        Invoke(nameof(ResetAttack), attackCooldown);
+        // Disable collider after impact
+        yield return new WaitForSeconds(0.2f); // 0.3 total - 0.1 wait = 0.2 more
+        DisableWeaponCollider();
+
+        // Reset attack cooldown
+        yield return new WaitForSeconds(attackCooldown - 0.3f); // Remaining time after collider disable
+        canAttack = true;
     }
 
     protected void EnableWeaponCollider() { if (weaponCollider != null) weaponCollider.enabled = true; }
     protected void DisableWeaponCollider() { if (weaponCollider != null) weaponCollider.enabled = false; }
-    protected void ResetAttack() { canAttack = true; }
 
     // ✅ Now detecting enemy collisions with prevention for multiple hits
     private void OnTriggerEnter(Collider other)

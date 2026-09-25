@@ -12,10 +12,21 @@ public class ZombieAcidAttack : MonoBehaviour
 
     private ZombieAI zombieAI;
     private Transform player;
+    private Coroutine attackCoroutine; // ✅ Track current attack coroutine
     
     void Awake()
     {
         zombieAI = GetComponent<ZombieAI>();
+    }
+
+    public void StartAttack()
+    {
+        // ✅ Stop previous attack if still running
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
+        attackCoroutine = StartCoroutine(ShootAcid());
     }
 
     public IEnumerator ShootAcid()
@@ -41,11 +52,14 @@ public class ZombieAcidAttack : MonoBehaviour
         zombieAI.Animator.SetTrigger("Bite");
 
         yield return new WaitForSeconds(0.8f); // Delay before checking again
-        zombieAI.CanBeInterrupted = false;
+
         // **Mid-Attack Check: Did the zombie die before finishing attack?**
         if (zombieAI.IsRagdollActive() || zombieAI.isDead)
         {
-            yield return new WaitForSeconds(3f);
+            // ✅ FIX: Reset canAttack immediately when hit during attack
+            canAttack = true;
+            zombieAI.CanBeInterrupted = true;
+            attackCoroutine = null; // ✅ Clear coroutine reference
             CancelAttack();
             yield break;
         }
@@ -54,15 +68,21 @@ public class ZombieAcidAttack : MonoBehaviour
         distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer > attackRange || player.GetComponent<PlayerController>().IsRolling())
         {
+            // ✅ Player escaped! Zombie continues animation but CAN be interrupted
+            // This gives player a chance to punish the zombie for missing
             yield return new WaitForSeconds(3f);
             CancelAttack();
             yield break;
         }
 
+        // ✅ Player is still in range - NOW make zombie invulnerable during hit
+        zombieAI.CanBeInterrupted = false;
+
         // **Knockback Effect (Only if zombie is still active)**
         if (!zombieAI.IsRagdollActive())
         {
             PlayerController playerController = player.GetComponent<PlayerController>();
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
             Animator playerAnimator = player.GetComponent<Animator>();
             var CanvasBlocker = zombieAI.CanvasBlocker;
             CanvasBlocker.gameObject.SetActive(true);
@@ -72,6 +92,12 @@ public class ZombieAcidAttack : MonoBehaviour
             yield return new WaitForEndOfFrame();
             playerAnimator.enabled = true;
             playerAnimator.SetTrigger("HeadHit");
+
+            // ✅ Deal damage to player
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(20f); // Zombie attack deals 20 damage
+            }
 
             // **Camera Effect**
             Camera.main.GetComponent<CameraController>().enabled = false;
@@ -127,11 +153,13 @@ public class ZombieAcidAttack : MonoBehaviour
 
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
+        attackCoroutine = null; // ✅ Clear coroutine reference when complete
     }
 
     private void CancelAttack()
     {
         zombieAI.currentState = EnemyAI.EnemyState.Chasing;
         canAttack = true;
+        attackCoroutine = null; // ✅ Clear coroutine reference
     }
 }

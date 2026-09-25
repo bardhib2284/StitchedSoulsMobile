@@ -16,6 +16,10 @@ public class HealthUI : MonoBehaviour
 
     public Image fillImageBackground; // Shto këtë për të marrë referencën e imazhit të mbushjes
 
+    // ✅ Flask UI elements
+    public Text flaskCountText;          // Display current flasks (e.g., "3/5")
+    public Image flaskIcon;              // Flask UI icon
+
     public void SetHealth(float amount)
     {
         HealthSlider.maxValue = amount;
@@ -79,6 +83,17 @@ public class HealthUI : MonoBehaviour
         {
             backgroundSlider.value = Mathf.Lerp(backgroundSlider.value, HealthSlider.value, Time.deltaTime * smoothSpeed);
             yield return null;
+        }
+    }
+
+    /// <summary>
+    /// Update flask count display (e.g., "3/5")
+    /// </summary>
+    public void UpdateFlaskCount(int currentFlasks, int maxFlasks)
+    {
+        if (flaskCountText != null)
+        {
+            flaskCountText.text = $"{currentFlasks}/{maxFlasks}";
         }
     }
 }

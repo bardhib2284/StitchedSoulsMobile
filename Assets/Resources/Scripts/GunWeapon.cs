@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using Assets.Resources.Scripts;
 
@@ -12,6 +13,16 @@ public class GunWeapon : Weapon
     private float nextFireTime = 0f;
     public List<EnemyAI> visibleEnemies = new List<EnemyAI>();
 
+    // ✅ Cached animator parameter hashes
+    private int gunAttackHashId;
+
+    public override void Start()
+    {
+        base.Start();
+        // ✅ Cache gun-specific animation parameter
+        gunAttackHashId = Animator.StringToHash("GunAttack");
+    }
+
     public override void Attack()
     {
         if (animator == null)
@@ -23,7 +34,7 @@ public class GunWeapon : Weapon
         if (animator != null)
         {
             this.GetComponent<Renderer>().enabled = true;
-            animator.SetTrigger("GunAttack");
+            animator.SetTrigger(gunAttackHashId); // ✅ Use hash instead of string
         }
         if (Time.time >= nextFireTime)
         {

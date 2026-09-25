@@ -44,7 +44,8 @@ public class ZombieAI : EnemyAI
                 float angle = Vector3.Angle(transform.forward, (Target.position - transform.position).normalized);
                 if (angle < fieldOfView)
                 {
-                    StartCoroutine(zombieAcidAttack.ShootAcid());
+                    // ✅ Use StartAttack() to properly manage coroutine lifecycle
+                    zombieAcidAttack.StartAttack();
                 }
             }
         }

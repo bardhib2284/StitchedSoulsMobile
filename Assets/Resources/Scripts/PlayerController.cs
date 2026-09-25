@@ -21,6 +21,14 @@ public class PlayerController : MonoBehaviour
     public GameObject ProjectileGameObject;
     public Transform Target;
 
+    // ✅ Cached animator parameter hashes (computed once in Awake)
+    private int attackHashId;
+    private int runHashId;
+    private int rollHashId;
+    private int happyIdleHashId;
+    private int sneakyWalkHashId;
+    private int hammerAttackHashId;
+
     [Header("Weapons")]
     public Weapon CurrentEquippedWeapon;
     public Weapon HammerWeapon;
@@ -59,6 +67,22 @@ public class PlayerController : MonoBehaviour
 
     public bool CanIdle = true;
 
+    // ✅ Cached camera reference (avoid Camera.main lookup every frame)
+    private Camera mainCamera;
+
+    // ✅ Cached AtticLevelCinematic reference
+    private AtticLevelCinematic atticLevelCinematic;
+
+    // ✅ Ground check optimization (reduce frequency)
+    private int groundCheckCounter = 0;
+    private const int GROUND_CHECK_FREQUENCY = 2; // Check every 2 frames
+
+    // ✅ Cached animator clip info (avoid multiple calls per frame)
+    private AnimatorClipInfo[] cachedAnimatorClipInfo;
+
+    // ✅ Track attack coroutine to prevent overlapping attacks
+    private Coroutine attackCoroutine;
+
     //AUDIO
 
 
@@ -89,6 +113,17 @@ public class PlayerController : MonoBehaviour
         source = GetComponent<AudioSource>();
         ConfigureSource();
 
+        // ✅ Cache animator parameter hashes (computed once, no string lookups after)
+        attackHashId = Animator.StringToHash("Attack");
+        runHashId = Animator.StringToHash("Run");
+        rollHashId = Animator.StringToHash("Roll");
+        happyIdleHashId = Animator.StringToHash("HappyIdle");
+        sneakyWalkHashId = Animator.StringToHash("SneakyWalk");
+        hammerAttackHashId = Animator.StringToHash("HammerAttack");
+
+        // ✅ Cache main camera reference (avoid Camera.main lookup)
+        mainCamera = Camera.main;
+
         // Preload small SFX to avoid hiccups on first play
         if (preloadClipNames != null)
         {
@@ -112,6 +147,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // ✅ Keyboard input for testing on PC
         if(Input.GetKeyDown(KeyCode.R))
         {
             WantToRoll();
@@ -120,9 +156,24 @@ public class PlayerController : MonoBehaviour
         {
             WantToJump();
         }
+        // ✅ NEW: Attack with A key for easier PC testing
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            if (!isRolling && !isAttacking && canAttack)
+            {
+                AttackCoroutine();
+            }
+        }
+
         if (isRolling || isAttacking) return; // No movement if rolling or attacking
 
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.02f, groundLayer);
+        // ✅ OPTIMIZATION: Check ground less frequently (every 2 frames instead of every frame)
+        groundCheckCounter++;
+        if (groundCheckCounter >= GROUND_CHECK_FREQUENCY)
+        {
+            isGrounded = Physics.CheckSphere(groundCheck.position, 0.02f, groundLayer);
+            groundCheckCounter = 0;
+        }
 
         if (wantsToRoll && canRoll && isGrounded)
         {
@@ -156,30 +207,39 @@ public class PlayerController : MonoBehaviour
             Move();
             currentMoveSpeed = moveSpeed * 0.5f;
         }
-        else if (joystickMagnitude > RunSpeedHandler && PlayerStamina.GetStamina() > 0.5f)
+        else if (joystickMagnitude > RunSpeedHandler)
         {
-            // ✅ Kontrollo nëse ka mjaftueshëm stamina para se të fillojë vrapimin
+            // ✅ Player is trying to run (joystick at max)
             if (PlayerStamina.GetStamina() > 0.5f)
             {
-                if (PlayerStamina.UseStamina(Time.deltaTime * 2f)) // ✅ Hargjon 2 stamina për sekondë
+                // ✅ Has stamina - try to use it
+                if (PlayerStamina.UseStamina(Time.deltaTime * 2f)) // ✅ Uses 2 stamina per second
                 {
-                    currentMoveSpeed = moveSpeed; // Full speed above 45%
+                    currentMoveSpeed = moveSpeed; // Full speed
 
-                    var animatorInfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
-                    if (animatorInfo.Length >= 1)
+                    // ✅ OPTIMIZATION: Cache animator clip info instead of calling multiple times
+                    cachedAnimatorClipInfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
+                    if (cachedAnimatorClipInfo.Length >= 1)
                     {
-                        var current_animation = animatorInfo[0].clip?.name;
+                        var current_animation = cachedAnimatorClipInfo[0].clip?.name;
                         if (current_animation != "Run")
                         {
-                            AnimatorController.SetTrigger("Run");
+                            AnimatorController.SetTrigger(runHashId); // ✅ Use hash instead of string
                         }
                     }
+                }
+                else
+                {
+                    // ✅ UseStamina() failed but we have some stamina - fall back to walking
+                    Move();
+                    currentMoveSpeed = moveSpeed * 0.5f;
                 }
             }
             else
             {
+                // ✅ No stamina - walk instead of run
                 Move();
-                currentMoveSpeed = moveSpeed * 0.5f; // ✅ Kur s’ka stamina, kalo në ecje
+                currentMoveSpeed = moveSpeed * 0.5f;
             }
         }
 
@@ -195,8 +255,9 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 GetMoveDirection()
     {
-        Vector3 camForward = Camera.main.transform.forward;
-        Vector3 camRight = Camera.main.transform.right;
+        // ✅ OPTIMIZATION: Use cached mainCamera instead of Camera.main lookup
+        Vector3 camForward = mainCamera.transform.forward;
+        Vector3 camRight = mainCamera.transform.right;
 
         camForward.y = 0;
         camRight.y = 0;
@@ -246,12 +307,14 @@ public class PlayerController : MonoBehaviour
         if(CanIdle)
         {
             if(AnimatorController != null && AnimatorController.GetCurrentAnimatorClipInfo(0) != null)
-            { 
-                if(AnimatorController.GetCurrentAnimatorClipInfo(0).Length > 0)
+            {
+                // ✅ OPTIMIZATION: Use cached animator info instead of calling multiple times
+                cachedAnimatorClipInfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
+                if(cachedAnimatorClipInfo.Length > 0)
                 {
-                    if (!AnimatorController.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("Idle"))
+                    if (!cachedAnimatorClipInfo[0].clip.name.Contains("Idle"))
                     {
-                        AnimatorController.CrossFade("HappyIdle", 0.04f);
+                        AnimatorController.CrossFade(happyIdleHashId, 0.04f); // ✅ Use hash instead of string
                     }
                 }
             }
@@ -260,18 +323,27 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if(AnimatorController.GetCurrentAnimatorClipInfo(0) != null && AnimatorController.GetCurrentAnimatorClipInfo(0)[0].clip != null)
+        // ✅ OPTIMIZATION: Use cached animator info instead of calling multiple times
+        cachedAnimatorClipInfo = AnimatorController.GetCurrentAnimatorClipInfo(0);
+        if(cachedAnimatorClipInfo != null && cachedAnimatorClipInfo.Length > 0 && cachedAnimatorClipInfo[0].clip != null)
         {
-            if (!AnimatorController.GetCurrentAnimatorClipInfo(0)[0].clip.name.Contains("Walk"))
+            if (!cachedAnimatorClipInfo[0].clip.name.Contains("Walk"))
             {
-                AnimatorController.SetTrigger("SneakyWalk");
+                AnimatorController.SetTrigger(sneakyWalkHashId); // ✅ Use hash instead of string
             }
         }
     }
 
     public void AttackCoroutine()
     {
-        StartCoroutine(Attack());
+        // ✅ Stop previous attack if still running (prevents overlapping attacks)
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            isAttacking = false; // Reset state if interrupted
+            canAttack = true;
+        }
+        attackCoroutine = StartCoroutine(Attack());
     }
 
     IEnumerator Attack()
@@ -284,7 +356,11 @@ public class PlayerController : MonoBehaviour
             var currentAnimation = animatorInfo[0].clip.name;
 
             // ✅ Prevent repeated attack animations
-            if (currentAnimation.Contains("Attack")) yield break;
+            if (currentAnimation.Contains("Attack"))
+            {
+                attackCoroutine = null;
+                yield break;
+            }
         }
 
         yield return new WaitForEndOfFrame();
@@ -305,6 +381,14 @@ public class PlayerController : MonoBehaviour
 
             isAttacking = false;
             canAttack = true;
+            attackCoroutine = null; // ✅ Clear reference when complete
+        }
+        else
+        {
+            // ✅ If attack couldn't start, reset state
+            isAttacking = false;
+            canAttack = true;
+            attackCoroutine = null;
         }
     }
 
@@ -339,12 +423,16 @@ public class PlayerController : MonoBehaviour
             HammerWeaponObject.SetActive(true);
             CurrentEquippedWeapon = HammerWeapon;
 
-            // ✅ Ensure Attack Button is Enabled
-            var atc = Object.FindAnyObjectByType<AtticLevelCinematic>();
-            if (atc != null)
+            // ✅ OPTIMIZATION: Cache AtticLevelCinematic reference instead of searching every time
+            if (atticLevelCinematic == null)
             {
-                atc.AttackButton.gameObject.SetActive(true);
-                atc.AttackButton.onClick.AddListener(AttackCoroutine);
+                atticLevelCinematic = Object.FindAnyObjectByType<AtticLevelCinematic>();
+            }
+
+            if (atticLevelCinematic != null)
+            {
+                atticLevelCinematic.AttackButton.gameObject.SetActive(true);
+                atticLevelCinematic.AttackButton.onClick.AddListener(AttackCoroutine);
             }
         }
     }
@@ -352,6 +440,14 @@ public class PlayerController : MonoBehaviour
     public void SetIsAttackingFalse()
     {
         isAttacking = false;
+
+        // ✅ Reset attack state if stuck
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+        }
+        canAttack = true;
     }
 
 
